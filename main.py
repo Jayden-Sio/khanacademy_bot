@@ -94,7 +94,7 @@ class Khan:
                 # 翻页
                 next_btn = br.find_element(By.XPATH, sys_settings['next_btn'])
                 # 如果没有下一页，则退出
-                if next_btn.get_attribute('class') == sys_settings['next_btn']:
+                if next_btn.get_attribute('class') != sys_settings['next_btn']:
                     print("no more page")
                     break
                 else:
