@@ -28,7 +28,11 @@ class Khan:
     def __init__(self):
         if self.login():
             print("login success")
-            self.get_course_list()
+            try:
+                self.get_course_list()
+            except Exception as e:
+                print("——" * 20+"ERROR"+"——" * 20)
+                br.close()
         else:
             print("login failed")
             br.quit()
@@ -53,14 +57,20 @@ class Khan:
 
     def get_course_list(self):
         print("course_list")
+
         for url in settings["assignment"]:
             print(settings['base_url'] + url)
             br.get(settings['base_url'] + url)
             time.sleep(10)
+            TRY_COUNT = 0
             while True:
-                # 等待表格加载完成
-                wait.until(EC.presence_of_element_located((By.CLASS_NAME, "_5kaapu")))
-                btns = br.find_elements(By.CLASS_NAME,sys_settings['assignment_btn'])
+                try:
+                    # 等待表格加载完成
+                    wait.until(EC.presence_of_element_located((By.CLASS_NAME, "_5kaapu")))
+                    btns = br.find_elements(By.CLASS_NAME,sys_settings['assignment_btn'])
+                except Exception as e:
+                    br.refresh()
+                    continue
 
                 # 当前页面视频总数
                 for i in btns:

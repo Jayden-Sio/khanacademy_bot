@@ -4,3 +4,4 @@ assignment_btn: '_qm98q6h'
 next_btn: '//*[@id="assignments-container"]/div[2]/button[2]'
 end_btn: '_1161iwl'
 exit_btn: '_xrgghrk'
+retry: 2
